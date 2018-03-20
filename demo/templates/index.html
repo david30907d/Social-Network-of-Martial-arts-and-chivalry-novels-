@@ -1,0 +1,18 @@
+{% load render_bundle from webpack_loader %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>笑傲江湖:Martial Arts and Chivalry Novels</title>
+    <link rel="stylesheet" type="text/css" href={% static "bower_components/semantic/dist/semantic.min.css" %}>
+</head>
+
+<body>
+  <div id="app"></div>
+  {% render_bundle 'main' 'js' 'INDEX' %}
+
+  </body>
+</html>

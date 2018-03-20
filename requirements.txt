@@ -2,3 +2,5 @@ bs4
 django
 networkx
 requests
+django-webpack-loader
+django-bower

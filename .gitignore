@@ -1,3 +1,18 @@
+bower_components
+webpack-stats*
+bundles/
+node_modules
+# auto Created when execute gen_kcm.py
+.idea/
+.term_pair_freq*
+ChineseWikiRawData
+
+
+# Project stuff
+entrance/settings_database.py
+uwsgi.deploy.ini
+db.sqlite3
+
 # virtualenv
 venv
 
@@ -74,6 +89,3 @@ docs/_build/
 
 # PyBuilder
 target/
-
-# pypi dist
-*.gz

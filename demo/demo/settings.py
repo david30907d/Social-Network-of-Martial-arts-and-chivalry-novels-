@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ] + [
+    'webpack_loader',
+    'djangobower',
     'socialNetwork'
 ]
 
@@ -56,7 +58,7 @@ ROOT_URLCONF = 'demo.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -120,3 +122,32 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# django-react conf
+STATICFILES_DIRS = [
+    #This lets Django's collectstatic store our bundles
+    os.path.join(BASE_DIR, 'assets'),
+]
+
+WEBPACK_LOADER = {
+    'INDEX': {
+        'BUNDLE_DIR_NAME': 'bundles/index/',
+        'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats-index.json'),
+    }
+}
+
+# django-bower allow django use bower to manage front-end library.
+
+BOWER_COMPONENTS_ROOT = BASE_DIR
+STATICFILES_DIRS.append(BOWER_COMPONENTS_ROOT)
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'djangobower.finders.BowerFinder',
+)
+
+
+BOWER_INSTALLED_APPS = (
+    'jquery#2.2.4',
+    'semantic#2.2.10',
+)
