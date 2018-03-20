@@ -20,7 +20,7 @@ module.exports = {
     
     plugins: [
         //tells webpack where to store data about your bundles.
-        new BundleTracker({filename: './webpack-stats-index.json'}), 
+        new BundleTracker({filename: './webpack-stats.json'}), 
         //makes jQuery available in every module
         new webpack.ProvidePlugin({ 
             $: 'jquery',
