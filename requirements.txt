@@ -4,3 +4,4 @@ networkx
 requests
 django-webpack-loader
 django-bower
+jieba
