@@ -7,7 +7,11 @@ from bs4 import BeautifulSoup
 # import Django models
 from socialNetwork.models import *
 
-#this version is operate by string comparision
+# import jieba
+import jieba
+import jieba.posseg as pseg
+
+#this version is operate by jieba
 class Command(BaseCommand):
 	help = 'a crawler for Martial arts and chivalry novels'
 
@@ -16,13 +20,9 @@ class Command(BaseCommand):
 		# Novel parts
 		novel = json.load(open('笑傲江湖.json', 'r'))
 		###
-		#load all character
-		character_list=[]
-		character_file=open('character.txt','r')
-		for each in character_file:
-			character_list.append(each.strip('99 name \n'))
-		character_file.close()
-
+		#start to cut and calculate word frequency
+		jieba.load_userdict('character.txt')
+		
 		#person with multiple name
 		match={'令狐沖':['令狐','沖兒','風大俠'],'任盈盈':['盈盈','任大小姐','聖姑'],
 		'左冷禪':['五嶽劍派盟主','嵩山派掌門'],'東方不敗':['日月神教教主','教主'],
@@ -59,7 +59,6 @@ class Command(BaseCommand):
 				#。in the end
 				ch=ch.replace('。』','』')
 				ch=ch.replace('。」','」')
-				
 				#。 in the middle
 				temp=ch
 				while temp.find('「')>0:
@@ -74,9 +73,12 @@ class Command(BaseCommand):
 				while ch.find('。')>0:
 					paragraph=ch[:ch.find('。')+1]
 					name_list=[]#uniqe list for each paragraph
-					for person in character_list:
-						if person in paragraph and not(person in name_list):
-							name_list.append(person)
+					
+					words=pseg.cut(paragraph)
+					name_list=[]#uniqe list for each chapter
+					for w in words:
+						if w.flag=='name' and w.word not in name_list:#'name' for only in chf.txt
+							name_list.append(w.word)			
 
 					if len(name_list)>1:
 						#combine same person with diff name
