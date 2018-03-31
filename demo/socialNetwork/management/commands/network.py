@@ -17,7 +17,6 @@ class Command(BaseCommand):
 
         # Showing info of Graph
         print(nx.info(G))
-
-        # Do other things with networkx API
-        # https://networkx.github.io/documentation/latest/tutorial.html#analyzing-graphs
+        print('transitivity (global clustering coefficient):' + str(nx.transitivity(G)))
+        print('average_clustering (average all local clustering coefficient to get this):' + str(nx.average_clustering(G)))
         self.stdout.write("Finish !")

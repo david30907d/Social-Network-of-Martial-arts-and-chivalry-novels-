@@ -32,3 +32,9 @@
     ]
   ]
   ```
+
+## CMD
+
+1. `python manage.py crawler`: get novel and insert character relationship into DB.
+2. `python manage.py network`: calculate network info.
+3. `python manage.py dump2csv`: dump DB into csv.
